@@ -45,40 +45,49 @@ public class CardApp {
         System.out.println("[" + player2.getName() + "]\n" + "Hand worth: " + player2Hand.getValue());
         System.out.println();
 
+
         // Display the winner
-        if (player1Hand.getValue() < 21 && player2Hand.getValue() < 21) {
-            // Both players have cards under 21 in value
-            if (player1Hand.getValue() > player2Hand.getValue()) {
-                // Winner is player 1
-                System.out.printf(
-                        "-> Winner is [%s] with: %d points!",
-                        player1.getName(),player1Hand.getValue()
-                );
-            } else {
-                // Winner is player 2
-                System.out.printf(
-                        "-> Winner is [%s] with: %d points!%n",
-                        player2.getName(),player2Hand.getValue()
-                );
-            }
+        int score1 = player1Hand.getValue();
+        int score2 = player2Hand.getValue();
+        boolean bust1 = score1 > 21;
+        boolean bust2 = score2 > 21;
+
+        if (bust1 && bust2) {
+            // Both players have cards above 21 in value
+            // Neither win
+            System.out.println("-> Neither player won! Both over 21 points!");
+        } else if (bust1) {
+            // Player 1 is above 21 in value
+            // Winner is player 2
+            System.out.printf(
+                    "-> Winner is [%s] with: %d points!%n",
+                    player2.getName(), score2
+            );
+        } else if (bust2) {
+            // Player 2 is above 21 in value
+            // Winner is player 1
+            System.out.printf(
+                    "-> Winner is [%s] with: %d points!%n",
+                    player1.getName(), score1
+            );
+        } else if (score1 > score2) {
+            // Both players have cards at or under 21 in value
+            // Winner is player 1
+            System.out.printf(
+                    "-> Winner is [%s] with: %d points!%n",
+                    player1.getName(), score1
+            );
+        } else if (score2 > score1) {
+            // Both players have cards at or under 21 in value
+            // Winner is player 2
+            System.out.printf(
+                    "-> Winner is [%s] with: %d points!%n",
+                    player2.getName(), score2
+            );
         } else {
-            // One or both players have cards above 21 in value
-            if (player1Hand.getValue() > 21) {
-                // Winner is player 1
-                System.out.printf(
-                        "-> Winner is [%s] with: %d points!%n",
-                        player1.getName(),player1Hand.getValue()
-                );
-            } else if (player2Hand.getValue() > 21) {
-                // Winner is player 2
-                System.out.printf(
-                        "-> Winner is [%s] with: %d points!%n",
-                        player2.getName(),player2Hand.getValue()
-                );
-            } else {
-                // Neither win
-                System.out.println("-> Neither player won! Both over 21 points!");
-            }
+            // Both players have the same value
+            // Tie
+            System.out.println("-> It's a tie! Both players have " + score1 + " points!");
         }
     }
 
