@@ -16,6 +16,8 @@ public class CardApp {
         // Create the deck
         Deck deck = new Deck();
 
+        // (Could just shuffle in here) - Note from eric
+
         // Create players
         Player player1 = new Player(name1,new Hand());
         Player player2 = new Player(name2,new Hand());
@@ -25,6 +27,7 @@ public class CardApp {
         Hand player2Hand = player2.getHand();
 
         // Deal 2 cards to each player
+        // (Could be a method) - Note from Eric
         for (int i = 0; i < 2; i++) {
             // Get card
             Card card1 = deck.deal();
@@ -45,8 +48,10 @@ public class CardApp {
         System.out.println("[" + player2.getName() + "]\n" + "Hand worth: " + player2Hand.getValue());
         System.out.println();
 
+        // (You should hit or stand, the other player does it)
 
         // Display the winner
+        // (This part could be a method, allows me to use @Test) - Note from Eric
         int score1 = player1Hand.getValue();
         int score2 = player2Hand.getValue();
         boolean bust1 = score1 > 21;
@@ -89,6 +94,7 @@ public class CardApp {
             // Tie
             System.out.println("-> It's a tie! Both players have " + score1 + " points!");
         }
+
     }
 
 }
